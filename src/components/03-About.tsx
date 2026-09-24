@@ -145,8 +145,15 @@ export default function About() {
               open source, or diving into the latest design trends. I'm always looking for 
               opportunities to learn and grow.
             </motion.p>
+          </motion.div>
 
-            {/* Animated Terminal */}
+          {/* Right — Timeline + Terminal */}
+          <motion.div
+            className="about__right"
+            variants={containerVariants}
+            initial="hidden"
+            animate={isInView ? 'visible' : 'hidden'}
+          >
             <motion.div
               className="about__terminal"
               initial={{ opacity: 0, y: 20 }}
@@ -154,13 +161,13 @@ export default function About() {
               transition={{ delay: 1 }}
               ref={terminalRef}
             >
-              <div className="about__terminal-header about__terminal-header--linux">
+              <div className="about__terminal-header about__terminal-header--windows">
                 <div className="about__terminal-controls" aria-hidden="true">
                   <span className="about__terminal-control about__terminal-control--red" />
                   <span className="about__terminal-control about__terminal-control--yellow" />
                   <span className="about__terminal-control about__terminal-control--green" />
                 </div>
-                <span className="about__terminal-title">bash</span>
+                <span className="about__terminal-title">powershell</span>
               </div>
               <div className="about__terminal-body">
                 <code>
@@ -174,15 +181,7 @@ export default function About() {
                 </code>
               </div>
             </motion.div>
-          </motion.div>
 
-          {/* Right — Timeline */}
-          <motion.div
-            className="about__right"
-            variants={containerVariants}
-            initial="hidden"
-            animate={isInView ? 'visible' : 'hidden'}
-          >
             <div className="about__timeline">
               {TIMELINE.map((item, i) => (
                 <motion.div

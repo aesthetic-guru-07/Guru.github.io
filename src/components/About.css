@@ -144,6 +144,12 @@
 .t-dim { color: var(--text-tertiary); font-style: italic; }
 
 /* — Timeline — */
+.about__right {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
 .about__timeline {
   display: flex;
   flex-direction: column;
