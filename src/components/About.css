@@ -71,53 +71,66 @@
 /* — Terminal — */
 .about__terminal {
   margin-top: 2rem;
-  border-radius: var(--radius-lg);
+  border-radius: 0.9rem;
   overflow: hidden;
-  border: 1px solid var(--border-subtle);
-  background: var(--bg-secondary);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  background: #0d1117;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.28);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 }
 .about__terminal:hover {
-  border-color: var(--border-accent);
-  box-shadow: var(--shadow-glow);
+  border-color: rgba(34, 211, 238, 0.5);
+  box-shadow: 0 22px 44px rgba(34, 211, 238, 0.12);
+  transform: translateY(-2px);
 }
 .about__terminal-header {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 0.75rem 1rem;
-  background: var(--bg-tertiary);
-  border-bottom: 1px solid var(--border-subtle);
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.7rem 1rem;
+  background: linear-gradient(180deg, #161b22, #0d1117);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.15);
 }
-.about__terminal-dot {
+.about__terminal-header--linux {
+  background: linear-gradient(180deg, #1e1e1e, #111827);
+}
+.about__terminal-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.about__terminal-control {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  transition: transform 0.2s ease;
+  display: inline-block;
+  opacity: 0.9;
 }
-.about__terminal:hover .about__terminal-dot {
-  transform: scale(1.15);
-}
-.about__terminal-dot--red { background: #ef4444; }
-.about__terminal-dot--yellow { background: #f59e0b; }
-.about__terminal-dot--green { background: #10b981; }
+.about__terminal-control--red { background: #ff5f57; }
+.about__terminal-control--yellow { background: #febc2e; }
+.about__terminal-control--green { background: #28c840; }
 .about__terminal-title {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
-  color: var(--text-tertiary);
-  margin-left: 0.5rem;
+  font-size: 0.68rem;
+  color: #d1d5db;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 .about__terminal-body {
   padding: 1.25rem;
   font-family: var(--font-mono);
   font-size: 0.82rem;
   line-height: 1.7;
-  min-height: 100px;
+  min-height: 150px;
+  background: rgba(13, 17, 23, 0.98);
+  color: #e5e7eb;
 }
 .about__terminal-cursor {
-  color: var(--primary-400);
+  color: #22d3ee;
   animation: blink-cursor 1s step-end infinite;
 }
+
 @keyframes blink-cursor {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }

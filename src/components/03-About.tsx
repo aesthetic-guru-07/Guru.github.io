@@ -32,16 +32,15 @@ const TIMELINE = [
 ];
 
 const TERMINAL_LINES = [
-  { delay: 300, text: '➜', cls: 't-green', inline: true },
-  { delay: 0, text: ' ~/passion', cls: 't-cyan', inline: true },
-  { delay: 0, text: ' git', cls: 't-purple', inline: true },
-  { delay: 0, text: ':(', cls: '', inline: true },
-  { delay: 0, text: 'main', cls: 't-red', inline: true },
-  { delay: 0, text: ') ', cls: '', inline: true },
-  { delay: 600, text: 'cat philosophy.txt', cls: 't-white', inline: false },
-  { delay: 400, text: '"Write code that tells a story,', cls: 't-dim', inline: false },
-  { delay: 300, text: ' design experiences that inspire,', cls: 't-dim', inline: false },
-  { delay: 300, text: ' build products that matter."', cls: 't-dim', inline: false },
+  { delay: 300, text: 'guru@ubuntu:~$ ', cls: 't-green', inline: true },
+  { delay: 0, text: 'whoami', cls: 't-white', inline: true },
+  { delay: 500, text: 'guru', cls: 't-cyan', inline: false },
+  { delay: 250, text: 'guru@ubuntu:~$ ', cls: 't-green', inline: true },
+  { delay: 0, text: 'cat about_me.txt', cls: 't-white', inline: true },
+  { delay: 300, text: 'Full Stack Developer', cls: 't-dim', inline: false },
+  { delay: 250, text: 'Building elegant digital experiences', cls: 't-dim', inline: false },
+  { delay: 250, text: 'React • TypeScript • Node.js • UX', cls: 't-dim', inline: false },
+  { delay: 250, text: 'Turning ideas into scalable, human-centered products.', cls: 't-dim', inline: false },
 ];
 
 export default function About() {
@@ -155,11 +154,13 @@ export default function About() {
               transition={{ delay: 1 }}
               ref={terminalRef}
             >
-              <div className="about__terminal-header">
-                <span className="about__terminal-dot about__terminal-dot--red" />
-                <span className="about__terminal-dot about__terminal-dot--yellow" />
-                <span className="about__terminal-dot about__terminal-dot--green" />
-                <span className="about__terminal-title">guru@dev ~</span>
+              <div className="about__terminal-header about__terminal-header--linux">
+                <div className="about__terminal-controls" aria-hidden="true">
+                  <span className="about__terminal-control about__terminal-control--red" />
+                  <span className="about__terminal-control about__terminal-control--yellow" />
+                  <span className="about__terminal-control about__terminal-control--green" />
+                </div>
+                <span className="about__terminal-title">bash</span>
               </div>
               <div className="about__terminal-body">
                 <code>
