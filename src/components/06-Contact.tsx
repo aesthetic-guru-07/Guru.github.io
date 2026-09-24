@@ -336,13 +336,13 @@ export default function Contact() {
       >
         <div className="contact__footer-inner">
           <p className="contact__footer-text">
-            Designed & Built with{' '}
+            Designed & Built{' '}
             <motion.span
               className="contact__footer-heart"
               animate={{ scale: [1, 1.3, 1] }}
               transition={{ duration: 1.5, repeat: Infinity }}
             >
-              💜
+              
             </motion.span>{' '}
             by <span className="gradient-text">Guru</span>
           </p>
