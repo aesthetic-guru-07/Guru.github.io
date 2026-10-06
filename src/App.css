@@ -1,86 +1,29 @@
-/* ============================== APP LAYOUT (EXTREME EDITION) ============================== */
-
-/* — Splash Screen — */
-.splash {
-  position: fixed;
-  inset: 0;
-  z-index: 10000;
-  background: var(--bg-primary);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1.5rem;
-}
-
-.splash__logo {
-  font-family: var(--font-mono);
-  font-size: 3rem;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.splash__bracket {
-  color: var(--primary-400);
-  text-shadow: 0 0 20px rgba(139, 69, 255, 0.5);
-}
-
-.splash__name {
-  font-family: var(--font-display);
-}
-
-.splash__bar {
-  height: 3px;
-  background: linear-gradient(90deg, var(--primary-500), var(--accent-400), var(--primary-300));
-  border-radius: var(--radius-full);
-  box-shadow: 0 0 20px rgba(139, 69, 255, 0.4);
-}
-
-.splash__text {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  color: var(--text-tertiary);
-  letter-spacing: 0.1em;
-}
-
-/* — Smooth section dividers — */
-main > section {
-  position: relative;
-}
-
-main > section::before {
+﻿.app-shell { position: relative; isolation: isolate; }
+main { position: relative; z-index: 1; }
+main > section { position: relative; }
+main > section:not(:first-child)::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(80%, 600px);
+  inset: 0 0 auto;
   height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    var(--border-subtle),
-    var(--border-accent),
-    var(--border-subtle),
-    transparent
-  );
+  width: min(80%, 1040px);
+  margin: 0 auto;
+  background: linear-gradient(90deg, transparent, rgba(89,243,255,0.2), transparent);
 }
-
-main > section:first-child::before {
-  display: none;
+.splash {
+  position: fixed; inset: 0; z-index: 9999; display: grid; place-items: center;
+  background: radial-gradient(circle at 50% 35%, rgba(89,243,255,0.1), transparent 38%), var(--bg-950);
+  overflow: hidden;
 }
-
-/* — Noise texture overlay — */
-main::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 100;
-  opacity: 0.02;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  mix-blend-mode: overlay;
-}
+.splash__orb { position: absolute; border-radius: 50%; filter: blur(110px); opacity: 0.45; }
+.splash__orb--one { width: 26rem; height: 26rem; top: 15%; left: 20%; background: rgba(89,243,255,0.18); animation: orbDrift 12s ease-in-out infinite alternate; }
+.splash__orb--two { width: 30rem; height: 30rem; right: 15%; bottom: 10%; background: rgba(177,140,255,0.14); animation: orbDrift 14s ease-in-out infinite alternate-reverse; }
+.splash__brand { position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 0.2rem; font-size: clamp(2rem, 7vw, 5rem); font-family: 'JetBrains Mono', monospace; font-weight: 700; letter-spacing: -0.08em; }
+.splash__bracket { color: var(--cyan); text-shadow: 0 0 25px rgba(89,243,255,0.6); }
+.splash__name { background: linear-gradient(135deg, var(--white), var(--cyan), var(--violet)); background-clip: text; -webkit-background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.splash__meta { position: relative; z-index: 1; margin-top: 1.5rem; width: min(320px, 72vw); display: flex; justify-content: space-between; color: var(--text-soft); font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; }
+.splash__track { position: relative; z-index: 1; width: min(320px, 72vw); height: 2px; background: rgba(255,255,255,0.07); border-radius: 999px; overflow: hidden; }
+.splash__bar { height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--cyan), var(--violet), var(--green)); box-shadow: 0 0 30px rgba(89,243,255,0.5); }
+.scroll-progress { position: fixed; top: 0; left: 0; width: 100%; height: 2px; z-index: 2000; transform-origin: left; background: linear-gradient(90deg, var(--cyan), var(--violet), var(--green)); box-shadow: 0 0 22px rgba(89,243,255,0.7); }
+@keyframes orbDrift { to { transform: translate3d(1.5rem, -1.5rem, 0) scale(1.08); } }
+@media (max-width: 560px) { .splash__meta { letter-spacing: 0.1em; font-size: 0.62rem; } }

@@ -20,10 +20,10 @@ export default function GridBackground() {
     window.addEventListener('resize', resize);
 
     const draw = () => {
-      time += 0.005;
+      time += 0.004;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      const spacing = 40;
+      const spacing = 50;
       const cols = Math.ceil(canvas.width / spacing) + 1;
       const rows = Math.ceil(canvas.height / spacing) + 1;
 
@@ -33,12 +33,12 @@ export default function GridBackground() {
           const y = j * spacing;
 
           // Pulsing wave
-          const wave = Math.sin(time + i * 0.15 + j * 0.15) * 0.5 + 0.5;
-          const opacity = 0.02 + wave * 0.04;
+          const wave = Math.sin(time + i * 0.12 + j * 0.12) * 0.5 + 0.5;
+          const opacity = 0.015 + wave * 0.025;
 
           ctx.beginPath();
-          ctx.arc(x, y, 1, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(139, 69, 255, ${opacity})`;
+          ctx.arc(x, y, 0.8, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(0, 229, 255, ${opacity})`;
           ctx.fill();
         }
       }
@@ -64,7 +64,7 @@ export default function GridBackground() {
         height: '100%',
         zIndex: -2,
         pointerEvents: 'none',
-        opacity: 0.6,
+        opacity: 0.5,
       }}
     />
   );

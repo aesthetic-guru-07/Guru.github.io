@@ -1,194 +1,24 @@
-/* ============================== NAVBAR (EXTREME EDITION) ============================== */
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: var(--z-sticky);
-  padding: 0.75rem var(--section-padding-x);
-  transition: all var(--duration-normal) var(--ease-out-expo);
+﻿.navbar {
+  position: fixed; inset: 0 0 auto; z-index: 1500; padding: 1rem clamp(1.25rem, 4vw, 2.5rem);
+  transition: padding 0.3s var(--ease), background 0.3s var(--ease), border-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
 }
-
-.navbar--scrolled {
-  background: var(--bg-glass);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border-bottom: 1px solid var(--border-subtle);
-  box-shadow: var(--shadow-md), 0 0 30px rgba(0,0,0,0.2);
-  padding: 0.5rem var(--section-padding-x);
-}
-
-.navbar__inner {
-  max-width: var(--container-max);
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
-}
-
-/* — Logo — */
-.navbar__logo {
-  font-family: var(--font-mono);
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 2px;
-}
-.navbar__logo-bracket {
-  color: var(--primary-400);
-  text-shadow: 0 0 10px rgba(139, 69, 255, 0.4);
-}
-.navbar__logo-name {
-  background: var(--text-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* — Desktop Links — */
-.navbar__links {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-  position: relative;
-  background: rgba(24, 24, 27, 0.5);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-full);
-  padding: 4px;
-  backdrop-filter: blur(10px);
-}
-
-.navbar__indicator {
-  position: absolute;
-  height: calc(100% - 8px);
-  top: 4px;
-  background: rgba(139, 69, 255, 0.15);
-  border: 1px solid rgba(139, 69, 255, 0.3);
-  border-radius: var(--radius-full);
-  transition: all var(--duration-normal) var(--ease-out-expo);
-  pointer-events: none;
-  box-shadow: 0 0 15px rgba(139, 69, 255, 0.1);
-}
-
-.navbar__link {
-  padding: 0.4rem 1rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--text-tertiary);
-  text-decoration: none;
-  border-radius: var(--radius-full);
-  transition: color var(--duration-fast) ease;
-  position: relative;
-  z-index: 1;
-  white-space: nowrap;
-}
-.navbar__link:hover {
-  color: var(--text-primary);
-}
-.navbar__link--active {
-  color: var(--text-primary);
-}
-
-.navbar__link-glow {
-  position: absolute;
-  inset: 0;
-  border-radius: var(--radius-full);
-  background: rgba(139, 69, 255, 0.08);
-  z-index: -1;
-}
-
-/* — CTA Button — */
-.navbar__cta {
-  padding: 0.5rem 1.5rem;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--bg-primary);
-  background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
-  border-radius: var(--radius-full);
-  text-decoration: none;
-  white-space: nowrap;
-  transition: box-shadow var(--duration-normal) ease;
-  position: relative;
-  overflow: hidden;
-  display: inline-flex;
-  align-items: center;
-}
-
-.navbar__cta-text {
-  position: relative;
-  z-index: 1;
-}
-
-.navbar__cta-glow {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, transparent, rgba(255,255,255,0.15), transparent);
-  transform: translateX(-100%);
-  animation: shimmer 3s infinite;
-}
-
-/* — Hamburger — */
-.navbar__hamburger {
-  display: none;
-  background: none;
-  color: var(--text-primary);
-  padding: 0.5rem;
-  border-radius: var(--radius-md);
-  transition: background 0.2s ease;
-}
-.navbar__hamburger:hover {
-  background: rgba(139, 69, 255, 0.1);
-}
-
-/* — Mobile Menu — */
-.navbar__mobile {
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  padding: 1rem 0;
-  background: var(--bg-glass);
-  backdrop-filter: blur(20px);
-  border-radius: var(--radius-lg);
-  margin-top: 0.5rem;
-}
-
-.navbar__mobile-link {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem 1rem;
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--text-secondary);
-  text-decoration: none;
-  border-radius: var(--radius-md);
-  transition: all var(--duration-fast) ease;
-}
-
-.navbar__mobile-num {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--primary-400);
-  opacity: 0.6;
-}
-
-.navbar__mobile-link:hover,
-.navbar__mobile-link--active {
-  color: var(--text-primary);
-  background: rgba(139, 69, 255, 0.1);
-}
-
-@media (max-width: 768px) {
-  .navbar__links,
-  .navbar__cta {
-    display: none;
-  }
-  .navbar__hamburger {
-    display: flex;
-  }
-}
+.navbar--scrolled { background: rgba(5, 7, 13, 0.72); backdrop-filter: blur(22px); border-bottom: 1px solid var(--line); box-shadow: 0 12px 40px rgba(0,0,0,0.22); padding-top: 0.7rem; padding-bottom: 0.7rem; }
+.navbar__inner { max-width: var(--max-width); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
+.navbar__logo { display: inline-flex; align-items: center; gap: 0.15rem; font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; font-weight: 700; letter-spacing: -0.05em; }
+.navbar__logo-bracket { color: var(--cyan); text-shadow: 0 0 18px rgba(89,243,255,0.5); }
+.navbar__logo-name { background: linear-gradient(135deg, var(--white), var(--cyan)); background-clip: text; -webkit-background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.navbar__links { position: relative; display: flex; align-items: center; gap: 0.25rem; padding: 0.35rem; border: 1px solid var(--line); border-radius: 999px; background: rgba(8,12,21,0.46); backdrop-filter: blur(18px); }
+.navbar__indicator { position: absolute; top: 0.25rem; height: calc(100% - 0.5rem); border-radius: 999px; background: rgba(89,243,255,0.1); border: 1px solid rgba(89,243,255,0.26); box-shadow: inset 0 0 16px rgba(89,243,255,0.08); transition: left 0.35s var(--ease), width 0.35s var(--ease); }
+.navbar__link { position: relative; z-index: 1; padding: 0.55rem 1rem; color: var(--text-soft); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
+.navbar__link--active, .navbar__link:hover { color: var(--white); }
+.navbar__link-glow { position: absolute; inset: 0; border-radius: inherit; background: rgba(89,243,255,0.08); }
+.navbar__cta { position: relative; display: inline-flex; align-items: center; gap: 0.55rem; padding: 0.7rem 1.15rem; border-radius: 999px; color: #04131a; background: linear-gradient(135deg, var(--cyan), var(--green)); font-size: 0.78rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; overflow: hidden; box-shadow: 0 0 25px rgba(89,243,255,0.18); }
+.navbar__cta-glow { position: absolute; inset: -50%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); transform: translateX(-100%); animation: navbarShimmer 3s ease-in-out infinite; }
+.navbar__hamburger { display: none; width: 2.75rem; height: 2.75rem; place-items: center; border-radius: 50%; background: rgba(255,255,255,0.03); color: var(--white); border: 1px solid var(--line); }
+.navbar__mobile { margin-top: 0.6rem; border: 1px solid var(--line); border-radius: 1.2rem; overflow: hidden; background: rgba(6,10,18,0.94); backdrop-filter: blur(24px); }
+.navbar__mobile-link { display: flex; align-items: center; gap: 0.8rem; padding: 1rem 1.2rem; border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text); font-weight: 600; }
+.navbar__mobile-link:last-child { border-bottom: 0; }
+.navbar__mobile-link--active { color: var(--cyan); background: rgba(89,243,255,0.06); }
+.navbar__mobile-num { min-width: 2rem; color: var(--text-soft); font-family: 'JetBrains Mono', monospace; font-size: 0.73rem; }
+@keyframes navbarShimmer { 45%,100% { transform: translateX(100%); } }
+@media (max-width: 920px) { .navbar__links, .navbar__cta { display: none; } .navbar__hamburger { display: grid; } .navbar { padding-inline: 1rem; } }

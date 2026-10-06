@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+﻿import { useEffect, useRef, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { HiMenu, HiX } from 'react-icons/hi';
 import MagneticButton from './MagneticButton';
 import './Navbar.css';
@@ -20,58 +20,60 @@ export default function Navbar() {
   const navLinksRef = useRef<(HTMLAnchorElement | null)[]>([]);
 
   useEffect(() => {
-    const onScroll = () => {
-      setScrolled(window.scrollY > 50);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 24);
+      const scrollPosition = window.scrollY + window.innerHeight * 0.35;
+      let current = activeSection;
 
-      // Scroll spy
-      const sections = NAV_ITEMS.map((item) => document.getElementById(item.id));
-      const scrollPos = window.scrollY + window.innerHeight / 3;
-
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = sections[i];
-        if (section && section.offsetTop <= scrollPos) {
-          setActiveSection(NAV_ITEMS[i].id);
+      for (let index = NAV_ITEMS.length - 1; index >= 0; index -= 1) {
+        const item = NAV_ITEMS[index];
+        const section = document.getElementById(item.id);
+        if (section && section.offsetTop <= scrollPosition) {
+          current = item.id;
           break;
         }
       }
+
+      setActiveSection((previous) => (previous !== current ? current : previous));
     };
 
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [activeSection]);
 
-  // Animate the indicator pill
   useEffect(() => {
-    const idx = NAV_ITEMS.findIndex((item) => item.id === activeSection);
-    const el = navLinksRef.current[idx];
-    if (el && indicatorRef.current) {
-      indicatorRef.current.style.left = el.offsetLeft + 'px';
-      indicatorRef.current.style.width = el.offsetWidth + 'px';
+    const index = NAV_ITEMS.findIndex((item) => item.id === activeSection);
+    const link = navLinksRef.current[index];
+    if (link && indicatorRef.current) {
+      indicatorRef.current.style.left = `${link.offsetLeft}px`;
+      indicatorRef.current.style.width = `${link.offsetWidth}px`;
     }
   }, [activeSection]);
 
   const scrollTo = (id: string) => {
     setMobileOpen(false);
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   return (
     <motion.nav
       className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`}
-      initial={{ y: -100, opacity: 0 }}
+      initial={{ y: -50, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ type: 'spring', stiffness: 100, damping: 20, delay: 0.2 }}
+      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
     >
       <div className="navbar__inner">
-        {/* Logo */}
-        <MagneticButton strength={0.2} radius={100}>
+        <MagneticButton strength={0.18} radius={90}>
           <motion.a
             href="#home"
             className="navbar__logo interactive"
-            onClick={(e) => { e.preventDefault(); scrollTo('home'); }}
+            onClick={(event) => {
+              event.preventDefault();
+              scrollTo('home');
+            }}
             whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            whileTap={{ scale: 0.96 }}
           >
             <span className="navbar__logo-bracket">&lt;</span>
             <span className="navbar__logo-name">Guru</span>
@@ -79,86 +81,91 @@ export default function Navbar() {
           </motion.a>
         </MagneticButton>
 
-        {/* Desktop Links */}
         <div className="navbar__links">
           <div ref={indicatorRef} className="navbar__indicator" />
-          {NAV_ITEMS.map((item, i) => (
-            <MagneticButton key={item.id} strength={0.15} radius={60}>
+          {NAV_ITEMS.map((item, index) => (
+            <MagneticButton key={item.id} strength={0.12} radius={70}>
               <a
-                ref={(el) => { navLinksRef.current[i] = el; }}
+                ref={(element) => {
+                  navLinksRef.current[index] = element;
+                }}
                 href={`#${item.id}`}
                 className={`navbar__link interactive ${activeSection === item.id ? 'navbar__link--active' : ''}`}
-                onClick={(e) => { e.preventDefault(); scrollTo(item.id); }}
+                onClick={(event) => {
+                  event.preventDefault();
+                  scrollTo(item.id);
+                }}
               >
                 {item.label}
                 {activeSection === item.id && (
-                  <motion.span
-                    className="navbar__link-glow"
-                    layoutId="navGlow"
-                    transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-                  />
+                  <motion.span className="navbar__link-glow" layoutId="navGlow" transition={{ type: 'spring', stiffness: 300, damping: 24 }} />
                 )}
               </a>
             </MagneticButton>
           ))}
         </div>
 
-        {/* CTA */}
-        <MagneticButton strength={0.3} radius={100}>
+        <MagneticButton strength={0.22} radius={100}>
           <motion.a
             href="#contact"
             className="navbar__cta interactive"
-            onClick={(e) => { e.preventDefault(); scrollTo('contact'); }}
-            whileHover={{ scale: 1.05, boxShadow: '0 0 35px rgba(139,69,255,0.5)' }}
-            whileTap={{ scale: 0.95 }}
+            onClick={(event) => {
+              event.preventDefault();
+              scrollTo('contact');
+            }}
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.96 }}
           >
-            <span className="navbar__cta-text">Let's Talk</span>
+            <span>Start a Project</span>
             <span className="navbar__cta-glow" />
           </motion.a>
         </MagneticButton>
 
-        {/* Mobile toggle */}
         <motion.button
+          type="button"
           className="navbar__hamburger interactive"
-          onClick={() => setMobileOpen(!mobileOpen)}
+          onClick={() => setMobileOpen((previous) => !previous)}
           aria-label="Toggle navigation"
-          whileTap={{ scale: 0.85 }}
+          aria-expanded={mobileOpen}
+          whileTap={{ scale: 0.9 }}
         >
           <AnimatePresence mode="wait">
             {mobileOpen ? (
               <motion.span key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }}>
-                <HiX size={24} />
+                <HiX size={20} />
               </motion.span>
             ) : (
               <motion.span key="menu" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }}>
-                <HiMenu size={24} />
+                <HiMenu size={20} />
               </motion.span>
             )}
           </AnimatePresence>
         </motion.button>
       </div>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
             className="navbar__mobile"
-            initial={{ opacity: 0, height: 0, filter: 'blur(10px)' }}
-            animate={{ opacity: 1, height: 'auto', filter: 'blur(0px)' }}
-            exit={{ opacity: 0, height: 0, filter: 'blur(10px)' }}
-            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, height: 0, y: -14 }}
+            animate={{ opacity: 1, height: 'auto', y: 0 }}
+            exit={{ opacity: 0, height: 0, y: -14 }}
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
           >
-            {NAV_ITEMS.map((item, i) => (
+            {NAV_ITEMS.map((item, index) => (
               <motion.a
                 key={item.id}
                 href={`#${item.id}`}
                 className={`navbar__mobile-link ${activeSection === item.id ? 'navbar__mobile-link--active' : ''}`}
-                onClick={(e) => { e.preventDefault(); scrollTo(item.id); }}
-                initial={{ x: -30, opacity: 0, filter: 'blur(5px)' }}
-                animate={{ x: 0, opacity: 1, filter: 'blur(0px)' }}
-                transition={{ delay: i * 0.06, type: 'spring', stiffness: 200, damping: 20 }}
+                onClick={(event) => {
+                  event.preventDefault();
+                  scrollTo(item.id);
+                }}
+                initial={{ x: -18, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ delay: index * 0.04 }}
               >
-                <span className="navbar__mobile-num">0{i + 1}.</span>
+                <span className="navbar__mobile-num">{String(index + 1).padStart(2, '0')}</span>
                 {item.label}
               </motion.a>
             ))}
