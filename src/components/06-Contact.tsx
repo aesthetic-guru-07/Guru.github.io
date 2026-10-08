@@ -6,9 +6,9 @@ import MagneticButton from './MagneticButton';
 import './Contact.css';
 
 const CONTACT_INFO = [
-  { icon: <HiMail />, label: 'Email', value: 'hello@guru.dev', href: 'mailto:hello@guru.dev' },
+  { icon: <HiMail />, label: 'Email', value: 'guruthedeveloper@gmail.com', href: 'mailto:guruthedeveloper@gmail.com' },
   { icon: <HiLocationMarker />, label: 'Location', value: 'India', href: '#contact' },
-  { icon: <HiPhone />, label: 'Phone', value: '+91 00000 00000', href: 'tel:+910000000000' },
+  { icon: <HiPhone />, label: 'Phone', value: '+91 XXXXX XXX98', href: 'tel:+91 XXXXX XXX98' },
 ];
 
 const SOCIALS = [
@@ -102,8 +102,8 @@ export default function Contact() {
       </div>
 
       <footer className="contact__footer">
-        <span>Designed and built with intention.</span>
-        <span>© {new Date().getFullYear()} Guru</span>
+        <span>{new Date().getFullYear()} © All rights reserved.</span>
+        <span>Developed by Guru</span>
       </footer>
     </section>
   );
